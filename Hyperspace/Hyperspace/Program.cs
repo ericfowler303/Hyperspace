@@ -14,7 +14,7 @@ namespace Hyperspace
             game.PlayGame();
         }
     }
-    class Obstacle
+    class Obstacle : IEquatable<Obstacle>
     {
         public int XCoord { get; set; }
         public int YCoord { get; set; }
@@ -47,6 +47,31 @@ namespace Hyperspace
             Console.SetCursorPosition(this.XCoord, this.YCoord);
             Console.ForegroundColor = this.Color;
             Console.Write(this.Symbol);
+        }
+
+        // Implement methods needed for IEquatable interface
+        public bool Equals(Obstacle otherObstacle)
+        {
+            //Check whether the compared object is null.
+            if (Object.ReferenceEquals(otherObstacle, null)) return false;
+
+            //Check whether the compared object references the same data.
+            if (Object.ReferenceEquals(this, otherObstacle)) return true;
+
+            //Check whether the products' properties are equal.
+            return this.XCoord.Equals(otherObstacle.XCoord) && this.YCoord.Equals(otherObstacle.YCoord);
+        }
+
+        // If Equals() returns true for a pair of objects 
+        // then GetHashCode() must return the same value for these objects.
+        public override int GetHashCode()
+        {
+            //Get hash code for the Name field if it is not null.
+            int hashXVal = XCoord.GetHashCode();
+            int hashYVal = YCoord.GetHashCode();
+
+            //Calculate the hash code for the Point
+            return hashXVal ^ hashYVal;
         }
     }
 
