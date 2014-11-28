@@ -10,6 +10,8 @@ namespace Hyperspace
     {
         static void Main(string[] args)
         {
+            Hyperspace game = new Hyperspace();
+            game.PlayGame();
         }
     }
     class Obstacle
@@ -43,6 +45,37 @@ namespace Hyperspace
             Console.SetCursorPosition(this.XCoord, this.YCoord);
             Console.ForegroundColor = this.Color;
             Console.Write(this.Symbol);
+        }
+    }
+
+    class Hyperspace
+    {
+        public int Score { get; set; }
+        public int Speed { get; set; }
+        public List<Obstacle> ObstacleList { get; set; }
+        public Obstacle SpaceShip { get; set; }
+        public bool Smashed { get; set; }
+
+        private Random rng = new Random();
+
+        public Hyperspace()
+        {
+            this.Score = 0;
+            this.Speed = 1;
+            this.ObstacleList = new List<Obstacle>();
+            // Setup the Console Window
+            Console.BufferHeight = 30;
+            Console.WindowHeight = 30;
+            Console.BufferWidth = 60;
+            Console.WindowWidth = 60;
+
+            // Place the user ship at the bottom center of the window
+            this.SpaceShip = new Obstacle((Console.WindowWidth/2),(Console.WindowHeight-1),ConsoleColor.Red);
+        }
+
+        public void PlayGame()
+        {
+
         }
     }
 }
