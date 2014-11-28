@@ -30,12 +30,14 @@ namespace Hyperspace
             this.XCoord = x;
             this.YCoord = y;
             this.Color = ConsoleColor.Cyan;
+            this.IsSpaceRift = false;
         }
         public Obstacle(int x, int y, ConsoleColor specColor)
         {
             this.XCoord = x;
             this.YCoord = y;
             this.Color = specColor;
+            this.IsSpaceRift = false;
         }
         /// <summary>
         /// Draw the Obstacle object to it's specified place on the screen
@@ -62,6 +64,7 @@ namespace Hyperspace
         {
             this.Score = 0;
             this.Speed = 1;
+            this.Smashed = false;
             this.ObstacleList = new List<Obstacle>();
             // Setup the Console Window
             Console.BufferHeight = 30;
@@ -74,6 +77,39 @@ namespace Hyperspace
         }
 
         public void PlayGame()
+        {
+            // Play the game until the player gets smashed by an obstacle
+            while (!this.Smashed)
+            {
+                if (rng.Next(0, 101) < 10)
+                {
+                    // 10% chance to make a space rift
+                    Obstacle obst = new Obstacle(rng.Next(0, Console.WindowWidth - 2), 5);
+                    obst.IsSpaceRift = true;
+                    this.ObstacleList.Add(obst);
+                }
+                else
+                {
+                    Obstacle obst = new Obstacle(rng.Next(0, Console.WindowWidth - 2), 5);
+                }
+
+                MoveShip();
+                MoveObstacles();
+                DrawGame();
+
+                // Up the speed of the game until it hits 170
+                if (this.Speed < 170) { this.Speed++;}
+            }
+        }
+        public void MoveShip()
+        {
+
+        }
+        public void MoveObstacles()
+        {
+
+        }
+        public void DrawGame()
         {
 
         }
