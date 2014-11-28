@@ -122,7 +122,15 @@ namespace Hyperspace
         }
         public void MoveObstacles()
         {
-
+            List<Obstacle> newObstacleList = new List<Obstacle>();
+            // Check which enemies are still on the screen
+            foreach (Obstacle enemy in ObstacleList)
+            {
+                // Move their coordinate
+                enemy.YCoord++;
+                // See if this a spacerift collided with the user
+                
+            }
         }
         public void DrawGame()
         {
