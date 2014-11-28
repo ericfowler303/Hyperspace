@@ -154,7 +154,26 @@ namespace Hyperspace
                 // Move their coordinate
                 enemy.YCoord++;
                 // See if this a spacerift collided with the user
-                
+                if (enemy.IsSpaceRift && enemy.Equals(this.SpaceShip))
+                {
+                    // Slow the ship because they hit the rift
+                    this.Speed -= 50;
+                }
+                else if (!enemy.IsSpaceRift && enemy.Equals(this.SpaceShip))
+                {
+                    // User collided with an enemy, game over
+                    this.Smashed = true;
+                }
+
+                // See which units are still on the screen, only keep those
+                if (enemy.YCoord < Console.WindowHeight) { newObstacleList.Add(enemy); }
+
+                // Since the user has passed this frame without dying, add a point to their score
+                this.Score++;
+
+                // Now that the obstacles have been updated, set it to the current list
+                this.ObstacleList = newObstacleList;
+
             }
         }
         public void DrawGame()
