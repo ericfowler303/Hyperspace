@@ -178,7 +178,24 @@ namespace Hyperspace
         }
         public void DrawGame()
         {
+            Console.Clear();
+            this.SpaceShip.Draw();
+            // Draw all of the enemies
+            foreach (Obstacle enemy in ObstacleList)
+            {
+                enemy.Draw();
+            }
 
+            // Draw the scoreboard
+            PrintAtPosition(20, 2, "Score: " + this.Score, ConsoleColor.Green);
+            PrintAtPosition(20, 3, "Speed: " + this.Speed, ConsoleColor.Green);
+            
+        }
+        private void PrintAtPosition(int x, int y, string text, ConsoleColor theColor)
+        {
+            Console.SetCursorPosition(x, y);
+            Console.ForegroundColor=theColor;
+            Console.Write(text);
         }
     }
 }
