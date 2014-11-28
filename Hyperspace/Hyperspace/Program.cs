@@ -103,7 +103,22 @@ namespace Hyperspace
         }
         public void MoveShip()
         {
-
+            ConsoleKeyInfo keyPressed;
+            if (Console.KeyAvailable)
+            {
+                while (Console.KeyAvailable) { Console.ReadKey(true); }
+                keyPressed = Console.ReadKey();
+            }
+            // Future-proof for possible new features
+            switch (keyPressed.Key)
+            {
+                case ConsoleKey.LeftArrow:
+                    if (this.SpaceShip.XCoord < 0) { this.SpaceShip.XCoord--; }
+                    break;
+                case ConsoleKey.RightArrow:
+                    if (this.SpaceShip.XCoord < (Console.WindowWidth - 2)) { this.SpaceShip.XCoord++; }
+                    break;
+            }
         }
         public void MoveObstacles()
         {
